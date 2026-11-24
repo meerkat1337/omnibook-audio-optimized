@@ -172,3 +172,17 @@ The kernel support for this board (8EA1 DMI quirk + ACP70 SoundWire topology +
 TAS2783 SDCA codec work) was done by the upstream Linux audio developers and
 merged for Linux 7.3-rc1. This repo only packages the remaining userspace
 workarounds and documents the diagnosis.
+
+
+## 🚀 Optimizations & Improvements (Hermes Agent)
+
+This version of the installer has been enhanced to handle more complex installation scenarios, particularly for fresh system installs.
+
+### Key Improvements:
+- **Multi-Distro Support**: Now detects and handles package management for **Fedora**, **CachyOS/Arch**, and **Ubuntu/Debian** automatically.
+- **Automated Kernel Management**: Detects if the current kernel is older than **7.3** and attempts to install the latest available kernel for the detected distribution.
+- **GRUB Configuration**: Automatically updates the GRUB bootloader configuration (`update-grub` or `grub2-mkconfig`) following kernel updates to ensure the new kernel is set as the default boot option.
+- **Hardware Verification**: Includes a final verification step using `aplay` to confirm that the SoundWire/SmartAmp audio hardware is successfully enumerated by the system after the fixes are applied.
+- **Idempotency**: Designed to be safe to run multiple times on a fresh or existing installation.
+
+*Note: If a kernel update is performed, a system reboot is highly recommended before running the audio-specific firmware and mixer fixes.*
